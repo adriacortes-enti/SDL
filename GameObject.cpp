@@ -19,6 +19,20 @@ SDL_Texture* GameObject::CreateTexture(SDL_Renderer* renderer) {
 	return textureTmp;
 }
 
+void GameObject::UpdateMovement(float dt) {
+	//UPDATE VELOCITY AND ANGULAR VELOCITY
+	linearVelocity = linearVelocity + linearAcceleration * dt;
+	angularVelocity = angularVelocity + angularAcceleration * dt;
+
+	//APPLY DRAG
+	linearVelocity = linearVelocity * (1.0 - linearDrag * dt);
+	angularVelocity = angularVelocity * (1.0 - angularDrag * dt);
+
+	//UPDATE POSITION
+	position = position + linearVelocity * dt;
+	rotation = rotation + angularVelocity * dt;
+}
+
 GameObject::GameObject(SDL_Renderer* renderer, Vector2 textSize, Vector2 textPadding) {
 	position = Vector2();
 	rotation = 0.f;
@@ -41,8 +55,8 @@ void GameObject::Render(SDL_Renderer* renderer) {
 
 
 	//SDL_RenderCopy(renderer, texture, &source, &destination);
-	SDL_RenderCopyEx(renderer, texture, &source, &destination, rotation, NULL, SDL_FLIP_NONE);
+	SDL_RenderCopyEx(renderer, texture, &source, &destination, 90.0f + rotation, NULL, SDL_FLIP_NONE);
 }
 void GameObject::Update(float dt) {
-	rotation += 1.0f;
+	UpdateMovement(dt);
 }

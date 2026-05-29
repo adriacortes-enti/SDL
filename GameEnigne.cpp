@@ -15,7 +15,7 @@ void GameEngine::InitSDL() {
 }
 
 void GameEngine::InitWindowAndRenderer(int windowWith, int windowHeight) {
-	window = SDL_CreateWindow("MyFirtsWindow",
+	window = SDL_CreateWindow("ASTEROIDS Adria Cortes",
 		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 		windowWith, windowHeight,
 		SDL_WINDOW_SHOWN);

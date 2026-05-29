@@ -28,6 +28,9 @@ protected:
 	float linearAccelFactor;
 	float angularAccelFactor;
 
+	float screenWidth;
+	float screenHeight;
+
 	SDL_Texture* CreateTexture(SDL_Renderer* renderer);
 
 	virtual void UpdateMovement(float dt);

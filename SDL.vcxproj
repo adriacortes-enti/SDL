@@ -35,6 +35,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="HighscoreScene.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Laser.h" />
     <ClInclude Include="MenuScene.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Spacechip.h" />

@@ -1,7 +1,7 @@
 #include "Spacechip.h"
 
-Spaceship::Spaceship(SDL_Renderer* renderer, Vector2 pos, float rot, Vector2 scl) :
-	GameObject(renderer, Vector2(32, 40), Vector2(0, 0)) {
+Spaceship::Spaceship(SDL_Renderer* renderer, Vector2 pos, float rot, Vector2 scl, std::vector<GameObject*>* gameObjects) :
+	GameObject(renderer, Vector2(32, 40), Vector2(0, 0)), renderer(renderer), gameObjects(gameObjects) {
 
 	position = pos;
 	rotation = rot;
@@ -25,7 +25,6 @@ Spaceship::Spaceship(SDL_Renderer* renderer, Vector2 pos, float rot, Vector2 scl
 	/*linearAcceleration = Vector2(1.5f, 1.5f);
 	angularAcceleration = 1.5f;*/
 }
-
 
 void Spaceship::UpdateMovement(float dt) {
     linearAcceleration = Vector2();
@@ -52,6 +51,10 @@ void Spaceship::UpdateMovement(float dt) {
         angularAcceleration = -angularAccelFactor;
     }
 
+  /*  if (IM.GetKey(SDLK_SPACE, DOWN))
+    {
+        ShootLaser();
+    }*/
 
     GameObject::UpdateMovement(dt); 
 
@@ -60,4 +63,12 @@ void Spaceship::UpdateMovement(float dt) {
     if (position.x > screenWidth) position.x -= screenWidth;
     if (position.y < 0) position.y += screenHeight;
     if (position.y > screenHeight) position.y -= screenHeight;
+}
+
+void Spaceship::ShootLaser() {
+    Vector2 laserPos = position;
+    float laserRot = rotation;
+    Vector2 laserScale(10, 2);
+
+    gameObjects->push_back(new Laser(renderer, laserPos, laserRot, laserScale));
 }

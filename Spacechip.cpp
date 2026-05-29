@@ -19,6 +19,9 @@ Spaceship::Spaceship(SDL_Renderer* renderer, Vector2 pos, float rot, Vector2 scl
 	linearAccelFactor = 50.0f; // pixels / sec^2
 	angularAccelFactor = 1800.0f; // Deg / sec^2
 
+    screenWidth = 500.0f;
+    screenHeight = 500.0f;
+
 	/*linearAcceleration = Vector2(1.5f, 1.5f);
 	angularAcceleration = 1.5f;*/
 }
@@ -48,7 +51,13 @@ void Spaceship::UpdateMovement(float dt) {
     {
         angularAcceleration = -angularAccelFactor;
     }
-    
 
-    GameObject::UpdateMovement(dt);
+
+    GameObject::UpdateMovement(dt); 
+
+    //hacer tp al otro lado de la pantalla
+    if (position.x < 0) position.x += screenWidth;
+    if (position.x > screenWidth) position.x -= screenWidth;
+    if (position.y < 0) position.y += screenHeight;
+    if (position.y > screenHeight) position.y -= screenHeight;
 }
